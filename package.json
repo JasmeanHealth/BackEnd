@@ -24,6 +24,7 @@
     "sequelize": "^6.12.5",
     "sequelize-auto": "^0.8.8",
     "sequelize-cli": "^6.3.0",
+    "twilio": "^3.72.0",
     "utf8": "^3.0.0"
   },
   "devDependencies": {

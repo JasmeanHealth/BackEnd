@@ -1,22 +1,7 @@
 const express = require('express');
 const TransactionQuery = require('../.BlockChainAPI/index');
-const { userTB, sequelize } = require('../models');
 const { packPayloadRes } = require('../lib/response');
 const router = express.Router();
-
-router.get('/info', async function (req, res, next) {
-  try {
-    const { name, gender, birth } = req.params;
-    const TransactionResult = await TransactionQuery('read', key);
-    res.json({
-      type: 'reservedUser',
-      query: key,
-      result: JSON.parse(TransactionResult),
-    });
-  } catch (error) {
-    res.json({ type: 'reserverUser', error: error });
-  }
-});
 
 router.post('/read/', async function (req, res, next) {
   try {

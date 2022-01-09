@@ -10,7 +10,7 @@ async function TransactionQuery(queryType, key, data) {
     const gateway = new Gateway();
     const connectionProfilePath = path.resolve(
       __dirname,
-      'TempOrg1GatewayConnection.json' // GateWay 위치
+      'TestOrg1GatewayConnection.json' // GateWay 위치
     );
 
     const connectionProfile = JSON.parse(

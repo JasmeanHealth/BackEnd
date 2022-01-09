@@ -2,7 +2,7 @@ import pandas as pd
 import sys
 import os
 
-df = pd.read_excel("C:/Users/kimud/Study/BlockChain/AI_API/data/211225_data_summary_v1.xlsx")
+df = pd.read_excel("/Users/kud/Desktop/qqqq/BackEnd/AI_API/data/211225_data_summary_v1.xlsx")
 doc_list = df['clincal_imp'].to_list()
 
 from sentence_transformers import SentenceTransformer, util

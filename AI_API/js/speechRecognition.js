@@ -13,7 +13,7 @@ function speechRecognition() {
     );
     let rs = exec(`python ${pythonPath} ${wavPath}`);
 
-    rs = iconv.decode(rs, 'euc-kr');
+    // rs = iconv.decode(rs, 'euc-kr');
 
     console.log(rs);
     return rs;

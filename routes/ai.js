@@ -19,24 +19,24 @@ const storage = multer.diskStorage({
 const uploadWithOriginalFilename = multer({ storage: storage });
 
 router.post(
-  '/upLoadWave',
+  '/extract',
   uploadWithOriginalFilename.array('attachments'),
   async function (req, res, next) {
     try {
       const speechRecog = speechRecognition();
 
-      res.json({ file: 'upLoadWave', result: speechRecog.toString() });
+      res.json({ type: 'wav를 문자로', result: speechRecog.toString() });
     } catch (error) {
       console.log(error);
       res.json(error);
     }
   }
 );
-router.post('/upLoadVoice', async function (req, res, next) {
+router.post('/recommend', async function (req, res, next) {
   try {
     const resultSimilarity = textSimilarity(req.body.user_voice);
-
-    res.json({ file: 'upLoadTalk', result: resultSimilarity });
+    const { first_choice, other_choice } = resultSimilarity.result[0];
+    res.json({ type: '문자를 추천으로', result: [first_choice, other_choice] });
   } catch (error) {
     console.log(error);
     res.json(error);
