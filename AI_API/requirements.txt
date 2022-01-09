@@ -1,0 +1,7 @@
+SpeechRecognition
+sentence_transformers
+librosa
+numpy 
+transformers
+pandas
+openpyxl

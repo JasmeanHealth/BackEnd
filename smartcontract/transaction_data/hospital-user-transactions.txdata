@@ -1,0 +1,44 @@
+[
+    {
+        "transactionName": "hospitalUserExists",
+        "transactionLabel": "A test hospitalUserExists transaction",
+        "arguments": [
+            "001"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "createHospitalUser",
+        "transactionLabel": "A test createHospitalUser transaction",
+        "arguments": [
+            "001",
+            "some value"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "readHospitalUser",
+        "transactionLabel": "A test readHospitalUser transaction",
+        "arguments": [
+            "001"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "updateHospitalUser",
+        "transactionLabel": "A test updateHospitalUser transaction",
+        "arguments": [
+            "001",
+            "some other value"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "deleteHospitalUser",
+        "transactionLabel": "A test deleteHospitalUser transaction",
+        "arguments": [
+            "001"
+        ],
+        "transientData": {}
+    }
+]

@@ -6,7 +6,6 @@ async function TransactionQuery(queryType, key, data) {
   try {
     const walletPath = path.join(__dirname, 'Org1'); // org1 지갑 위치
     const wallet = await Wallets.newFileSystemWallet(walletPath);
-    console.log(`Wallet path: ${walletPath}`);
 
     const gateway = new Gateway();
     const connectionProfilePath = path.resolve(
@@ -28,52 +27,60 @@ async function TransactionQuery(queryType, key, data) {
 
     const network = await gateway.getNetwork('mychannel');
 
-    const contract = network.getContract('qqq'); // smart contract 이름 적기
+    const contract = network.getContract('smartcontract'); // smart contract 이름 적기
 
     let result = '';
     switch (queryType) {
       case 'create': // create 함수
         if (key && data == undefined) console.log('key or data is undeined');
+        console.log(data);
         const createResult = await contract.submitTransaction(
-          'createMyAsset',
-          key,
-          data
+          'createHospitalUser',
+          JSON.stringify(key),
+          JSON.stringify(data)
         );
+        console.log(createResult);
         result = 'Transaction has been submitted';
         break;
 
       case 'read': // read 함수
         if (key == undefined) console.log('key is undeined');
         const readResult = await contract.evaluateTransaction(
-          'readMyAsset',
-          key
+          'readHospitalUser',
+          JSON.stringify(key)
         );
-        result = readResult.toString();
+        const value = JSON.parse(readResult.toString()).value;
+
+        result = JSON.parse(value);
         break;
 
       case 'update': // update 함수
         if (key && data == undefined) console.log('key or data is undeined');
         const updateResult = await contract.submitTransaction(
-          'updateMyAsset',
-          key,
-          data
+          'updateHospitalUser',
+          JSON.stringify(key),
+          JSON.stringify(data)
         );
-        result = 'Transaction has been submitted';
+        result = 'Update Transaction Success ';
         break;
 
       case 'delete': // delete 함수
-        if (key && data == undefined) console.log('key is undeined');
+        if (key == undefined) console.log('key is undeined');
+        console.log('AAA');
         const deleteResult = await contract.submitTransaction(
-          'deleteMyAsset',
-          key
+          'deleteHospitalUser',
+          JSON.stringify(key)
         );
-        result = 'Transaction has been submitted';
+        result = 'Delete Transaction Success ';
+        break;
+
+      default:
+        console.log('query is worng');
         break;
     }
     gateway.disconnect();
     return result;
   } catch (error) {
-    console.log(error);
     return error.toString();
   }
 }

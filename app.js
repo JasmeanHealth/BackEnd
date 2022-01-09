@@ -1,5 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -7,6 +8,9 @@ const cors = require('cors');
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
+const reserveRouter = require('./routes/reserve');
+const userRouter = require('./routes/user');
+const mediaRouter = require('./routes/media');
 
 const app = express();
 
@@ -18,11 +22,14 @@ app.use(cookieParser());
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/reserve', reserveRouter);
+app.use('/user', userRouter);
+app.use('/media', mediaRouter);
 
 // catch 404 and forward to error handler
-// app.use(function (req, res, next) {
-//   next(createError(404));
-// });
+app.use(function (req, res, next) {
+  next(createError(404));
+});
 
 // error handler
 app.use(function (err, req, res, next) {
@@ -32,8 +39,19 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json('error');
 });
+
+app.use(
+  session({
+    HttpOnly: true,
+    secure: false,
+    secret: 'asd',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 24000 * 60 * 60 },
+  })
+);
 
 app.listen(3000, () => {
   console.log('Sever listen 3000 Port');
