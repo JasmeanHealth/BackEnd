@@ -2,7 +2,7 @@ const express = require('express');
 const TransactionQuery = require('../.BlockChainAPI/index');
 const Twilio = require('../Twilio/');
 const router = express.Router();
-
+let randNumber = Math.floor(Math.random() * 1000000);
 /* GET users listing. */
 
 router.post('/user/', async function (req, res, next) {
@@ -10,9 +10,9 @@ router.post('/user/', async function (req, res, next) {
     const { name, gender, birth } = req.body;
     const key = { name, gender, birth };
     const TransactionResult = await TransactionQuery('read', key);
-    // const randNummer = Math.floor(Math.random() * 1000000);
-    const randNummer = 333333;
-    Twilio(randNummer);
+    // 
+    //randNummer = 333333;
+    Twilio(randNumber);
     res.json({ type: 'user/read', query: key, result: TransactionResult });
   } catch (error) {
     res.json({ type: 'user/read', error: error });
@@ -23,7 +23,7 @@ router.post('/confirm/', async function (req, res, next) {
   try {
     const { name, gender, birth, authCode } = req.body;
     const key = { name, gender, birth };
-    if (authCode === '333333') {
+    if (authCode === randNumber) {
       const value = { Certification: 'yes' };
       let TransactionResult = await TransactionQuery('update', key, value);
       res.json({
@@ -39,6 +39,7 @@ router.post('/confirm/', async function (req, res, next) {
       });
     }
   } catch (error) {
+    console.log(error)
     res.json({ type: 'user/read', error: error });
   }
 });

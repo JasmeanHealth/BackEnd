@@ -10,7 +10,7 @@ async function TransactionQuery(queryType, key, data) {
     const gateway = new Gateway();
     const connectionProfilePath = path.resolve(
       __dirname,
-      'TestOrg1GatewayConnection.json' // GateWay 위치
+      'TempOrg1GatewayConnection.json' // GateWay 위치
     );
 
     const connectionProfile = JSON.parse(
@@ -66,7 +66,6 @@ async function TransactionQuery(queryType, key, data) {
 
       case 'delete': // delete 함수
         if (key == undefined) console.log('key is undeined');
-        console.log('AAA');
         const deleteResult = await contract.submitTransaction(
           'deleteHospitalUser',
           JSON.stringify(key)

@@ -9,7 +9,7 @@ function textSimilarity(arg) {
     '..',
     '/textSimilarity/textSimilarity.py'
   );
-  let rs = exec(`python ${pythonPath} ${xlsxPath}  ${arg}`);
+  let rs = exec(`python ${pythonPath} x${arg}`);
   rs = iconv.decode(rs, 'euc-kr');
   let data = JSON.parse(rs);
   data = { result: data };
